@@ -244,3 +244,37 @@
   }
   .choice-grid label:hover > span { transform: translateY(-3px) scale(1.02); }
 }
+
+.motion-star {
+  display: inline-block;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .motion-star {
+    animation: star-shimmer var(--star-period, 3.8s) var(--ease-out) var(--star-phase, 0ms) infinite;
+  }
+  .ribbon .motion-star:nth-of-type(2),
+  .closing-stars .motion-star:nth-child(2) { --star-phase: -1.3s; }
+  .ribbon .motion-star:nth-of-type(3),
+  .closing-stars .motion-star:nth-child(3) { --star-phase: -2.5s; }
+  .delivery .motion-star, .footer-brand .motion-star { --star-phase: -900ms; }
+  .big-star.motion-star { --star-period: 6.4s; }
+  .spark {
+    animation: sparkle-arrival 850ms var(--ease-out) both,
+      star-breathe 4s ease-in-out var(--spark-delay, 1s) infinite;
+  }
+  .s2 { --spark-delay: 1.35s; animation-delay: 100ms, var(--spark-delay); }
+  .s3 { --spark-delay: 1.7s; animation-delay: 200ms, var(--spark-delay); }
+  .hero-stardust span {
+    animation: stardust-flight 4s var(--ease-out) var(--delay, 0ms) both,
+      star-breathe 4.4s ease-in-out calc(4s + var(--delay, 0ms)) infinite;
+  }
+}
+@keyframes star-shimmer {
+  0%, 100% { transform: scale(1) rotate(0); }
+  45% { transform: scale(1.14) rotate(9deg); }
+}
+@keyframes star-breathe {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.16; }
+}
