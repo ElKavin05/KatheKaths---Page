@@ -95,7 +95,7 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
   const sections = document.querySelectorAll(
     '.collection .section-heading, .feature-card, .box-list article, ' +
     '.chooser-heading, .personal-inner, .how > div:first-child, .steps article, ' +
-    '.delivery, .payments h2, .payment-card, .closing h2',
+    '.delivery-content h3, .delivery-card, .payments h2, .payment-card, .closing h2',
   );
   for (const section of sections) {
     if (section.getBoundingClientRect().top >= window.innerHeight) observer.observe(section);
