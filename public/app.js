@@ -7,6 +7,7 @@ const prices = {
   'Beauty Box': [20, 30, 40],
   'Letter Box': [20, 30, 40],
   'Anime Box': [25, 35, 45],
+  'Potter Box': [25],
 };
 const sizes = ['10 productos', '15 productos', '20 productos'];
 
@@ -20,6 +21,16 @@ function selection() {
 }
 
 function update() {
+  const isPotterBox = form.elements.box.value === 'Potter Box';
+  for (const option of form.querySelectorAll('input[name="size"]')) {
+    const unavailable = isPotterBox && !sizes.slice(0, 2).includes(option.value);
+    if (unavailable) option.checked = false;
+    option.disabled = unavailable;
+    option.closest('label').hidden = unavailable;
+  }
+  document.querySelector('#size-hint').textContent = isPotterBox
+    ? 'Potter Box está disponible con 10 o 15 productos.'
+    : 'Para cajas temáticas, puedes consultar las opciones disponibles.';
   const { box, size } = selection();
   const count = Number(Boolean(box)) + Number(Boolean(size));
   progress.dataset.count = count;
