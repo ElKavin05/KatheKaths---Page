@@ -365,3 +365,24 @@
 @media (max-width: 370px) {
   .announcement-spark { display: none; }
 }
+
+.delivery-details { align-items: flex-start; }
+.delivery-content { flex: 1; min-width: 0; }
+.delivery-content h3 { font: 32px Georgia, serif; margin: 0 0 20px; }
+.delivery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.delivery-card {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: #fbf9f2;
+}
+.delivery-card h4 { color: var(--green); margin: 0 0 8px; }
+.delivery-card h4:not(:first-child) { margin-top: 20px; }
+.delivery-card p { margin: 0 0 8px; }
+.delivery-card ul { padding-inline-start: 20px; margin: 0 0 12px; font-size: 14px; line-height: 1.6; }
+.delivery-card > :last-child { margin-bottom: 0; }
+@media (max-width: 650px) {
+  .delivery-details { gap: 12px; }
+  .delivery-details > .motion-star { font-size: 24px; }
+  .delivery-grid { grid-template-columns: 1fr; }
+}
