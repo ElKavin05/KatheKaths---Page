@@ -1,5 +1,6 @@
 const form = document.querySelector('#box-form');
 const summary = document.querySelector('#summary-text');
+const sizeHint = document.querySelector('#size-hint');
 const price = document.querySelector('#price-text');
 const progress = form.querySelector('.selection-progress');
 const progressCount = document.querySelector('#selection-progress-count');
@@ -21,16 +22,23 @@ function selection() {
 }
 
 function update() {
-  const isPotterBox = form.elements.box.value === 'Potter Box';
+  const boxType = form.elements.box.value;
+  const isPotterBox = boxType === 'Potter Box';
   for (const option of form.querySelectorAll('input[name="size"]')) {
     const unavailable = isPotterBox && option.value === '20 productos';
     if (unavailable) option.checked = false;
     option.disabled = unavailable;
     option.closest('label').hidden = unavailable;
   }
-  document.querySelector('#size-hint').textContent = isPotterBox
-    ? 'Elige 10 o 15 productos, o selecciona Más opciones para preguntar por otras alternativas.'
-    : 'Para cajas mixtas, puedes consultar las opciones disponibles.';
+  let hint = 'Elige un tipo de caja para ver las opciones de cantidad.';
+  if (isPotterBox) {
+    hint = 'Para Potter Box, elige 10 o 15 productos, o selecciona «Más opciones».';
+  } else if (boxType === 'Cajas mixtas') {
+    hint = 'Para cajas mixtas, elige una cantidad o selecciona «Más opciones» para consultar.';
+  } else if (boxType) {
+    hint = `Para ${boxType}, elige 10, 15 o 20 productos, o selecciona «Más opciones».`;
+  }
+  if (sizeHint.textContent !== hint) sizeHint.textContent = hint;
   const { box, size } = selection();
   const count = Number(Boolean(box)) + Number(Boolean(size));
   progress.dataset.count = count;
