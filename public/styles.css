@@ -357,3 +357,11 @@
   text-underline-offset: 3px;
 }
 .announcement a:focus-visible { outline-offset: -2px; }
+
+.announcement a { text-decoration: none; }
+.announcement a:hover { color: #f5d996; }
+.announcement-spark { font-size: 10px; --star-phase: -1.3s; }
+.announcement-spark:last-child { --star-phase: -2.5s; }
+@media (max-width: 370px) {
+  .announcement-spark { display: none; }
+}
