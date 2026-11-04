@@ -199,3 +199,48 @@
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.22); }
 }
+
+/* Rounded surfaces and distinct hover feedback. */
+:root {
+  --radius-panel: 24px;
+  --radius-control: 14px;
+}
+.button, .nav-cta { border-radius: var(--radius-control); }
+.feature-card, .chooser-card, .payment-card { border-radius: var(--radius-panel); }
+.photo-note, .feature-caption, .payment-logo, .summary,
+.choice-grid label > span, .chooser textarea { border-radius: var(--radius-control); }
+.photo-frame { border-bottom-left-radius: var(--radius-control); border-bottom-right-radius: var(--radius-control); }
+.box-list article { padding-inline: 14px; border-radius: var(--radius-control); }
+.choice-grid input:focus-visible + span { outline-offset: 3px; }
+.chooser textarea:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .box-list article:hover { background-color: #f0ebe0; }
+  .payment-card:hover { border-color: #aa956c; }
+  .choice-grid label:hover > span { border-color: var(--violet); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .button, .nav-cta { position: relative; overflow: hidden; }
+  .button::after, .nav-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 25%, #ffffff38 50%, transparent 75%);
+    transform: translateX(-110%);
+    transition: transform 520ms var(--ease-out);
+  }
+  .button:hover::after, .nav-cta:hover::after { transform: translateX(110%); }
+  .feature-card img { transition: transform 600ms var(--ease-out); }
+  .feature-card:hover img { transform: scale(1.045); }
+  .feature-caption, .box-list article .number, .payment-logo img {
+    transition: transform 250ms var(--ease-out);
+  }
+  .feature-card:hover .feature-caption { transform: translateY(-5px); }
+  .box-list article:hover .number { transform: translateX(3px) scale(1.15); }
+  .payment-card:hover .payment-logo img { transform: scale(1.06); }
+  .payment-card, .box-list article {
+    transition: border-color 220ms var(--ease-out), background-color 220ms var(--ease-out);
+  }
+  .choice-grid label:hover > span { transform: translateY(-3px) scale(1.02); }
+}
