@@ -423,3 +423,47 @@
   from { transform: scaleX(.2); opacity: .25; }
   to { transform: scaleX(1); opacity: 1; }
 }
+
+.contact-float {
+  position: fixed;
+  z-index: 8;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 10px 16px;
+  border: 1px solid #a78b54;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--cream);
+  box-shadow: 0 6px 22px #1b1c252d;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.contact-spark {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  color: #e0bc76;
+  line-height: 1;
+  text-shadow: 0 1px 4px #263c3280;
+  pointer-events: none;
+}
+.contact-float:focus-visible { outline-offset: 3px; }
+footer { padding-bottom: max(88px, calc(74px + env(safe-area-inset-bottom))); }
+@media (max-width: 480px) {
+  .contact-float { padding: 8px 12px; gap: 6px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .contact-float { animation: page-arrival 520ms var(--ease-out) 350ms both; }
+  .contact-float:focus-visible { animation: none; }
+  .contact-spark { animation: star-shimmer 3.8s var(--ease-out) 1s 2; }
+  @media (hover: hover) and (pointer: fine) {
+    .contact-float { transition: translate 180ms var(--ease-out); }
+    .contact-float:hover { translate: 0 -4px; }
+    .contact-float:hover .contact-spark { animation: star-breathe 800ms ease-in-out 1; }
+  }
+}
