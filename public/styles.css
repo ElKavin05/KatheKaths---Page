@@ -334,3 +334,26 @@
 }
 @keyframes ribbon-roll { to { transform: translateX(-50%); } }
 @keyframes ribbon-wave { to { transform: translateX(-50%); } }
+
+.announcement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: clamp(8px, 2vw, 18px);
+  background: var(--green);
+  color: var(--cream);
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+.announcement .motion-star { color: var(--gold); }
+.announcement a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  text-underline-offset: 3px;
+}
+.announcement a:focus-visible { outline-offset: -2px; }
