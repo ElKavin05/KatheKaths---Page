@@ -30,7 +30,7 @@ function update() {
   }
   document.querySelector('#size-hint').textContent = isPotterBox
     ? 'Potter Box está disponible con 10 o 15 productos.'
-    : 'Para cajas temáticas, puedes consultar las opciones disponibles.';
+    : 'Para cajas mixtas, puedes consultar las opciones disponibles.';
   const { box, size } = selection();
   const count = Number(Boolean(box)) + Number(Boolean(size));
   progress.dataset.count = count;
