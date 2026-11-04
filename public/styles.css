@@ -151,3 +151,38 @@
   .button:hover, .button:active, .choice-grid label:hover span,
   .box-shortcut:hover span[aria-hidden] { transform: none; }
 }
+
+/* Decorative star trail around the gift illustration. */
+.hero-stardust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-stardust span {
+  position: absolute;
+  inset: var(--y) auto auto var(--x);
+  color: var(--star-color, #98783b);
+  font-size: var(--star-size, 14px);
+  line-height: 1;
+  opacity: .65;
+  animation: stardust-flight 4s cubic-bezier(.23, 1, .32, 1) var(--delay, 0ms) both;
+}
+.hero-stardust span:nth-child(1) { --x: 16%; --y: 14%; --star-size: 19px; --dx: 16px; --dy: -17px; }
+.hero-stardust span:nth-child(2) { --x: 27%; --y: 6%; --dx: 13px; --dy: -11px; --delay: 180ms; }
+.hero-stardust span:nth-child(3) { --x: 74%; --y: 9%; --star-size: 11px; --dx: -13px; --dy: -10px; --delay: 360ms; }
+.hero-stardust span:nth-child(4) { --x: 90%; --y: 28%; --dx: -16px; --dy: -18px; --delay: 520ms; --star-color: #77628b; }
+.hero-stardust span:nth-child(5) { --x: 92%; --y: 47%; --star-size: 20px; --dx: -14px; --dy: -14px; --delay: 680ms; }
+.hero-stardust span:nth-child(6) { --x: 8%; --y: 59%; --star-size: 12px; --dx: 12px; --dy: -18px; --delay: 440ms; --star-color: #77628b; }
+.hero-stardust span:nth-child(7) { --x: 12%; --y: 78%; --star-size: 19px; --dx: 16px; --dy: -12px; --delay: 220ms; }
+@keyframes stardust-flight {
+  0% { opacity: .1; transform: translate(var(--dx), var(--dy)) scale(.9) rotate(-22deg); }
+  25% { opacity: .85; }
+  60% { opacity: .35; transform: translate(0, -5px) scale(1.08) rotate(12deg); }
+  100% { opacity: .65; transform: translate(0, 0) scale(1) rotate(0); }
+}
+@media (max-width: 480px) {
+  .hero-stardust span:nth-child(3n) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-stardust span { animation: none; }
+}
