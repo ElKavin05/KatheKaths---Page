@@ -23,13 +23,13 @@ function selection() {
 function update() {
   const isPotterBox = form.elements.box.value === 'Potter Box';
   for (const option of form.querySelectorAll('input[name="size"]')) {
-    const unavailable = isPotterBox && !sizes.slice(0, 2).includes(option.value);
+    const unavailable = isPotterBox && option.value === '20 productos';
     if (unavailable) option.checked = false;
     option.disabled = unavailable;
     option.closest('label').hidden = unavailable;
   }
   document.querySelector('#size-hint').textContent = isPotterBox
-    ? 'Potter Box está disponible con 10 o 15 productos.'
+    ? 'Elige 10 o 15 productos, o selecciona Más opciones para preguntar por otras alternativas.'
     : 'Para cajas mixtas, puedes consultar las opciones disponibles.';
   const { box, size } = selection();
   const count = Number(Boolean(box)) + Number(Boolean(size));
@@ -66,7 +66,7 @@ form.addEventListener('submit', (event) => {
   const lines = [
     'Hola, quisiera consultar sobre una caja de KatheKaths.',
     `Caja: ${box}`,
-    `Cantidad: ${size}`,
+    size === 'Más opciones' ? 'Quisiera conocer más opciones para esta caja.' : `Cantidad: ${size}`,
   ];
   if (idea) lines.push(`Mi idea: ${idea}`);
   window.location.href = `https://wa.me/50766344468?text=${encodeURIComponent(lines.join('\n'))}`;
