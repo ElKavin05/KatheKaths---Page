@@ -186,3 +186,16 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-stardust span { animation: none; }
 }
+
+.hero-copy .eyebrow-star {
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy .eyebrow-star {
+    animation: eyebrow-star-pulse 2.8s ease-in-out 700ms infinite;
+  }
+}
+@keyframes eyebrow-star-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.22); }
+}
