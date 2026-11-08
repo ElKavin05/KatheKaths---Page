@@ -467,3 +467,27 @@ footer { padding-bottom: max(88px, calc(74px + env(safe-area-inset-bottom))); }
     .contact-float:hover .contact-spark { animation: star-breathe 800ms ease-in-out 1; }
   }
 }
+
+.gift-scene { display: block; width: 100%; height: 100%; }
+.gift-float, .gift-ground-shadow, .gift-twinkle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gift-float { animation: gift-drift 7s ease-in-out infinite; }
+  .gift-ground-shadow { animation: gift-shadow-drift 7s ease-in-out infinite; }
+  .gift-twinkle { animation: gift-glint 3.8s var(--ease-out) infinite; }
+  .gift-twinkle-late { animation-delay: -1.7s; }
+}
+@keyframes gift-drift {
+  0%, 100% { transform: translate(-7px, 0) rotate(-1deg); }
+  50% { transform: translate(8px, -21px) rotate(2deg); }
+}
+@keyframes gift-shadow-drift {
+  0%, 100% { transform: translateX(-5px) scale(1); opacity: 1; }
+  50% { transform: translateX(6px) scale(.79); opacity: .56; }
+}
+@keyframes gift-glint {
+  0%, 100% { transform: scale(.84); opacity: .7; }
+  45% { transform: scale(1.18); opacity: 1; }
+}
