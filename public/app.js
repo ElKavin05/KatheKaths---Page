@@ -95,9 +95,47 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
   const sections = document.querySelectorAll(
     '.collection .section-heading, .feature-card, .box-list article, ' +
     '.chooser-heading, .personal-inner, .how > div:first-child, .steps article, ' +
-    '.delivery-content h3, .delivery-card, .payments h2, .payment-card, .closing h2',
+    '.delivery-content h3, .delivery-card, .payments h2, .payment-card, .reviews-heading, .review-track, .closing h2',
   );
   for (const section of sections) {
     if (section.getBoundingClientRect().top >= window.innerHeight) observer.observe(section);
   }
 }
+
+const reviewTrack = document.querySelector('#review-track');
+const reviewControls = document.querySelector('.review-controls');
+const reviewCards = Array.from(reviewTrack.querySelectorAll('.review-card'));
+const previousReview = reviewControls.querySelector('[data-review-step="-1"]');
+const nextReview = reviewControls.querySelector('[data-review-step="1"]');
+
+function updateReviewControls() {
+  previousReview.disabled = reviewTrack.scrollLeft <= 1;
+  nextReview.disabled = reviewTrack.scrollLeft + reviewTrack.clientWidth >= reviewTrack.scrollWidth - 1;
+}
+
+reviewControls.hidden = false;
+updateReviewControls();
+reviewTrack.addEventListener('scroll', updateReviewControls, { passive: true });
+window.addEventListener('resize', updateReviewControls);
+reviewControls.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-review-step]');
+  if (!button) return;
+  const stride = reviewCards[1].offsetLeft - reviewCards[0].offsetLeft;
+  reviewTrack.scrollBy({
+    left: stride * Number(button.dataset.reviewStep),
+    behavior: motionPreference.matches ? 'instant' : 'smooth',
+  });
+});
+
+const reviewDialog = document.querySelector('.review-dialog');
+const fullReview = reviewDialog.querySelector('.review-full');
+reviewTrack.addEventListener('click', (event) => {
+  const link = event.target.closest('.review-image');
+  if (!link || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  if (typeof reviewDialog.showModal !== 'function') return;
+
+  event.preventDefault();
+  fullReview.alt = link.querySelector('img').alt;
+  fullReview.src = link.href;
+  reviewDialog.showModal();
+});
